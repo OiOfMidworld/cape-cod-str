@@ -1,14 +1,9 @@
 # Cape Cod Short-Term Rental Tracker
 
-An ETL pipeline that tracks short-term rental (STR) growth across all 15 Barnstable County towns, identifying conversion of year-round housing stock to seasonal rentals and correlating STR density with housing affordability trends.
+An ETL pipeline that tracks short-term rental (STR) growth across all 15 Barnstable County towns
 
 ---
 
-## The Problem
-
-Cape Cod has one of the highest STR concentrations in Massachusetts. An estimated 5,800 year-round homes were converted to seasonal use between 2009–2019, and the trend is accelerating. This pipeline provides a clean, unified, and regularly updated dataset to quantify the problem at the town level.
-
----
 
 ## Project Structure
 
@@ -81,13 +76,6 @@ cape-cod-str-tracker/
 
 ## Data Sources
 
-| Source | Data | Format | Update Frequency |
-|---|---|---|---|
-| MA DOR STR Registry | Street + town of all registered STRs | Web / CSV | Monthly |
-| MassGIS Parcel Data | Every Barnstable County parcel: address, owner, assessed value, zoning | Shapefile | Annual |
-| Census Bureau ACS API | Total units, seasonal vs year-round counts, median income | REST API | Annual |
-| datacapecod.org | Median home prices, housing affordability per town | CSV | Varies |
-| Inside Airbnb | Active Airbnb listings with price, reviews, availability | CSV | Quarterly |
 
 ---
 
@@ -143,50 +131,5 @@ See `schema.sql` for full DDL. Key tables:
 
 ---
 
-## Setup
-
-```bash
-# Clone and install
-git clone https://github.com/yourname/cape-cod-str-tracker.git
-cd cape-cod-str-tracker
-pip install -r requirements.txt
-
-# Configure environment
-cp .env.example .env
-# Add Census API key (free at api.census.gov)
-
-# Initialize database
-python load/duckdb_loader.py --init
-
-# Run full pipeline
-python orchestration/flows.py --run-all
-
-# Launch dashboard
-streamlit run dashboard/app.py
-```
-
----
-
-## Sprint Plan
-
-See `SPRINTS.md` for the full breakdown.
-
----
 
 ## Tech Stack
-
-| Layer | Tool | Why |
-|---|---|---|
-| Language | Python 3.11+ | Core ETL logic |
-| Spatial | geopandas | Shapefile ingestion |
-| Fuzzy match | rapidfuzz | Address matching across sources |
-| Database | DuckDB | Zero-config analytical DB |
-| Transforms | dbt-duckdb | SQL transform layer, marketable skill |
-| Orchestration | Prefect | Simpler than Airflow, free cloud tier |
-| Dashboard | Streamlit | Fastest path to shareable UI |
-
----
-
-## Contributing
-
-This is a solo portfolio project, but PRs and issues are welcome — especially additional data sources or corrections to the town name lookup table.
