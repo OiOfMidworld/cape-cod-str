@@ -1,0 +1,42 @@
+raw_name,canonical_name,source
+Barnstable,Barnstable,ALL
+Bourne,Bourne,ALL
+Brewster,Brewster,ALL
+Chatham,Chatham,ALL
+Dennis,Dennis,ALL
+Eastham,Eastham,ALL
+Falmouth,Falmouth,ALL
+Harwich,Harwich,ALL
+Mashpee,Mashpee,ALL
+Orleans,Orleans,ALL
+Provincetown,Provincetown,ALL
+Sandwich,Sandwich,ALL
+Truro,Truro,ALL
+Wellfleet,Wellfleet,ALL
+Yarmouth,Yarmouth,ALL
+Hyannis,Barnstable,DOR
+Centerville,Barnstable,DOR
+Osterville,Barnstable,DOR
+Cotuit,Barnstable,DOR
+Marstons Mills,Barnstable,DOR
+West Barnstable,Barnstable,DOR
+Barnstable County,Barnstable,CENSUS
+P-Town,Provincetown,AIRBNB
+Ptown,Provincetown,AIRBNB
+East Falmouth,Falmouth,PARCELS
+North Falmouth,Falmouth,PARCELS
+West Falmouth,Falmouth,PARCELS
+Woods Hole,Falmouth,PARCELS
+South Yarmouth,Yarmouth,PARCELS
+West Yarmouth,Yarmouth,PARCELS
+Yarmouthport,Yarmouth,PARCELS
+South Dennis,Dennis,PARCELS
+East Dennis,Dennis,PARCELS
+West Dennis,Dennis,PARCELS
+Dennis Port,Dennis,PARCELS
+Dennisport,Dennis,PARCELS
+North Harwich,Harwich,PARCELS
+Harwich Port,Harwich,PARCELS
+Harwichport,Harwich,PARCELS
+West Harwich,Harwich,PARCELS
+East Harwich,Harwich,PARCELS

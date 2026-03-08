@@ -1,0 +1,29 @@
+# Core
+requests==2.31.0
+pandas==2.2.0
+python-dotenv==1.0.0
+
+# Database
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.27
+
+# Geospatial (Sprint 3)
+#geopandas==0.14.3
+#shapely==2.0.3
+
+# Fuzzy matching (Sprint 4)
+rapidfuzz==3.6.1
+
+# Orchestration (Sprint 7)
+prefect==2.16.0
+
+# Dashboard (Sprint 8)
+streamlit==1.31.0
+plotly==5.18.0
+
+# dbt (Sprint 6)
+dbt-duckdb==1.7.2
+
+# Testing
+pytest==8.0.0
+pytest-cov==4.1.0
