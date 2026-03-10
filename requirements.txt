@@ -8,7 +8,7 @@ psycopg2-binary==2.9.9
 sqlalchemy==2.0.27
 
 # Geospatial (Sprint 3)
-#geopandas==0.14.3
+geopandas==0.14.3
 #shapely==2.0.3
 
 # Fuzzy matching (Sprint 4)
@@ -27,3 +27,7 @@ dbt-duckdb==1.7.2
 # Testing
 pytest==8.0.0
 pytest-cov==4.1.0
+
+#scrape
+beautifulsoup4==4.12.3
+lxml==5.1.0

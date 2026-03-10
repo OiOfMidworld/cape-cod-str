@@ -22,7 +22,11 @@ CREATE TABLE IF NOT EXISTS raw.str_registry (
     town                VARCHAR,
     county              VARCHAR,
     registration_type   VARCHAR,    -- 'owner-occupied', 'professional', etc.
-    source_row_hash     VARCHAR     -- MD5 of raw row for deduplication
+    source_row_hash     VARCHAR,    -- MD5 of raw row for deduplication
+    zip_code            VARCHAR,     
+    certificate_id      VARCHAR,
+    property_type       VARCHAR,
+    city_raw            VARCHAR
 );
 
 -- MassGIS Parcel Data
@@ -114,7 +118,10 @@ CREATE TABLE IF NOT EXISTS staging.stg_str_registry (
     town                VARCHAR,    -- normalized via town_name_lookup
     registration_type   VARCHAR,
     source_row_hash     VARCHAR,
-    PRIMARY KEY (source_row_hash, snapshot_date)
+    certificate_id      VARCHAR,
+    property_type       VARCHAR,
+    zip_code            VARCHAR,
+    CONSTRAINT stg_str_registry_pkey PRIMARY KEY (certificate_id, snapshot_date)
 );
 
 -- Cleaned Parcel data: one row per parcel, most recent data year
@@ -283,3 +290,76 @@ VALUES
     ('Harwich Port',        'Harwich',          'PARCELS'),
     ('West Harwich',        'Harwich',          'PARCELS')
 ON CONFLICT (raw_name, source) DO NOTHING;
+
+
+CREATE TABLE IF NOT EXISTS raw.massgis_parcels (
+    loc_id          VARCHAR,
+    prop_id         VARCHAR,
+    site_addr       VARCHAR,
+    addr_num        VARCHAR,
+    full_str        VARCHAR,
+    city            VARCHAR,
+    zip             VARCHAR(10),
+    use_code        VARCHAR,
+    total_val       INTEGER,
+    other_val       INTEGER,
+    bldg_val        INTEGER,
+    land_val        INTEGER,
+    lot_size        FLOAT,
+    lot_units       VARCHAR,
+    year_built      INTEGER,
+    bld_area        INTEGER,
+    res_area        INTEGER,
+    units           INTEGER,
+    style           VARCHAR,
+    stories         VARCHAR,
+    num_rooms       INTEGER,
+    owner1          VARCHAR,
+    own_addr        VARCHAR,
+    own_city        VARCHAR,
+    own_state       VARCHAR,
+    own_zip         VARCHAR,
+    zoning          VARCHAR,
+    fy              INTEGER,
+    town_id         INTEGER,
+    town            VARCHAR,
+    ingested_at     TIMESTAMP,
+    PRIMARY KEY (loc_id)
+);
+
+CREATE TABLE IF NOT EXISTS staging.stg_massgis_parcels (
+    loc_id          VARCHAR,
+    prop_id         VARCHAR,
+    site_addr       VARCHAR,
+    addr_num        VARCHAR,
+    full_str        VARCHAR,
+    city            VARCHAR,
+    zip             VARCHAR(10),
+    use_code        VARCHAR,
+    use_desc        VARCHAR,
+    total_val       INTEGER,
+    other_val       INTEGER,
+    bldg_val        INTEGER,
+    land_val        INTEGER,
+    lot_size        FLOAT,
+    lot_units       VARCHAR,
+    year_built      INTEGER,
+    bld_area        INTEGER,
+    res_area        INTEGER,
+    units           INTEGER,
+    town_id         INTEGER,
+    style           VARCHAR,
+    stories         VARCHAR,
+    num_rooms       INTEGER,
+    owner1          VARCHAR,
+    own_addr        VARCHAR,
+    own_city        VARCHAR,
+    own_state       VARCHAR,
+    own_zip         VARCHAR,
+    zoning          VARCHAR,
+    fy              INTEGER,
+    town            VARCHAR,
+    is_residential  BOOLEAN,
+    ingested_at     TIMESTAMP,
+    PRIMARY KEY (loc_id)
+);
