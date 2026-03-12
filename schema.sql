@@ -363,3 +363,13 @@ CREATE TABLE IF NOT EXISTS staging.stg_massgis_parcels (
     ingested_at     TIMESTAMP,
     PRIMARY KEY (loc_id)
 );
+
+CREATE TABLE IF NOT EXISTS staging.stg_str_parcel_match (
+    certificate_id  VARCHAR,
+    loc_id          VARCHAR,
+    town            VARCHAR,
+    match_type      VARCHAR,
+    match_score     FLOAT,
+    snapshot_date   DATE,
+    PRIMARY KEY (certificate_id, loc_id, snapshot_date)
+);
