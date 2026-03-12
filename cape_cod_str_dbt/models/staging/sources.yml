@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: staging
+    schema: staging
+    tables:
+      - name: stg_census_acs
+      - name: stg_str_registry
+      - name: stg_massgis_parcels
+      - name: stg_str_parcel_match
