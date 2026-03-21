@@ -22,7 +22,6 @@ streamlit==1.31.0
 plotly==5.18.0
 
 # dbt (Sprint 6)
-dbt-duckdb==1.7.2
 
 # Testing
 pytest==8.0.0
