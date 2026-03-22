@@ -52,27 +52,25 @@ def _load_lookup() -> dict:
 
 
 def normalize_town(raw_name: str, fuzzy_threshold: int = 85):
-    raw_name = ' '.join(raw_name.split())  # collapses multiple spaces
     """
     Normalize a raw town name string to a canonical Barnstable County town.
-
     Resolution order:
         1. Exact match (case-insensitive) against lookup table
         2. Already a canonical name
         3. Fuzzy match against canonical names (requires rapidfuzz)
         4. Returns None if no confident match found
-
     Args:
         raw_name:        Raw town name string from any source
         fuzzy_threshold: Minimum rapidfuzz score to accept (0-100, default 85)
-
     Returns:
         Canonical town name string, or None if no match
     """
     if not raw_name or not isinstance(raw_name, str):
         return None
+    raw_name = raw_name.strip()
+    raw_name = ' '.join(raw_name.split())
+    cleaned = raw_name
 
-    cleaned = raw_name.strip()
     lookup = _load_lookup()
 
     # 1. Exact match in lookup table

@@ -31,7 +31,5 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   cape_cod_str_dbt:
-    staging:
-      +materialized: view
     mart:
       +materialized: table

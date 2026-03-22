@@ -129,6 +129,8 @@ def run():
     fuzzy_results = fuzzy_match(unmatched_str, par_df)
     logger.info(f"Fuzzy matches: {len(fuzzy_results)}")
     
+
+    
     # combine results
     all_matches = pd.concat([exact_results, fuzzy_results], ignore_index=True)
     
@@ -143,6 +145,7 @@ def run():
             'match_type': 'unmatched',
             'match_score': None
         })
+        unmatched_df = unmatched_df.dropna(axis=1, how='all')
         all_matches = pd.concat([all_matches, unmatched_df], ignore_index=True)
     
 # only load matched records
