@@ -101,12 +101,6 @@ fig2 = px.bar(
 fig2.update_layout(height=500, barmode='stack')
 st.plotly_chart(fig2, use_container_width=True)
 
-st.divider()
-
-# Property Characteristics
-st.subheader("STR Property Characteristics")
-
-st.divider()
 
 # Growth Over Time
 st.subheader("STR Growth Over Time")
