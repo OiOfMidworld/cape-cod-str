@@ -25,3 +25,5 @@ htmlcov/
 # IDE
 .vscode/
 .idea/
+cape_cod_str_backup.sql
+cape_cod_str_dashboard.sql
