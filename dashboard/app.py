@@ -116,3 +116,13 @@ fig5 = px.line(
 )
 fig5.update_layout(height=500)
 st.plotly_chart(fig5, use_container_width=True)
+
+st.subheader("Monthly STR Count")
+engine = create_engine(os.getenv('DATABASE_URL'))
+monthly = pd.read_sql("""
+    SELECT snapshot_date, COUNT(DISTINCT certificate_id) as str_count
+    FROM staging.stg_str_registry
+    GROUP BY snapshot_date
+    ORDER BY snapshot_date
+""", engine)
+st.dataframe(monthly, use_container_width=True)
