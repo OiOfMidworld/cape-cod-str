@@ -125,4 +125,5 @@ monthly = pd.read_sql("""
     GROUP BY snapshot_date
     ORDER BY snapshot_date
 """, engine)
+monthly['new_since_prior_month'] = monthly['str_count'].diff().astype('Int64')
 st.dataframe(monthly, use_container_width=True)
