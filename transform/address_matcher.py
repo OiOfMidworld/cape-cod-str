@@ -42,8 +42,9 @@ def normalize_street(name):
 
 def load_data(engine):
     str_df = pd.read_sql("""
-        SELECT certificate_id, street_name, town, zip_code 
+        SELECT DISTINCT ON (certificate_id) certificate_id, street_name, town, zip_code
         FROM staging.stg_str_registry
+        ORDER BY certificate_id, snapshot_date DESC
     """, engine)
     
     par_df = pd.read_sql("""
