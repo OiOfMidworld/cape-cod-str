@@ -3,12 +3,12 @@
 with str_counts as (
     select
         town,
-        date_part('year', snapshot_date::date) as snapshot_year,
-        count(distinct certificate_id) as str_count
+    DATE_TRUNC('quarter', snapshot_date)::date AS snapshot_quarter,
+    count(distinct certificate_id) as str_count
     from {{ source('staging', 'stg_str_registry') }}
     where town is not null
     and trim(town) = town
-    group by town, date_part('year', snapshot_date::date)
+    group by town, DATE_TRUNC('quarter', snapshot_date)::date
 ),
 
 latest_census_year as (
@@ -28,7 +28,7 @@ census as (
 final as (
     select
         s.town,
-        s.snapshot_year,
+        s.snapshot_quarter,
         s.str_count,
         c.total_housing_units,
         c.survey_year as census_year_used,
@@ -41,4 +41,4 @@ final as (
 )
 
 select * from final
-order by town, snapshot_year
+order by town, snapshot_quarter

@@ -41,14 +41,24 @@ parcels as (
     from {{ source('staging', 'stg_massgis_parcels') }}
 ),
 
-str as (
+str_ranked as (
     select
         certificate_id,
         street_name,
         town,
         zip_code,
-        snapshot_date
+        snapshot_date,
+        row_number() over (
+            partition by certificate_id
+            order by snapshot_date desc
+        ) as rn
     from {{ source('staging', 'stg_str_registry') }}
+),
+
+str as (
+    select certificate_id, street_name, town, zip_code, snapshot_date
+    from str_ranked
+    where rn = 1
 ),
 
 final as (

@@ -107,12 +107,12 @@ st.subheader("STR Growth Over Time")
 st.caption("Chart will populate as monthly snapshots accumulate.")
 
 fig5 = px.line(
-    str_growth.sort_values('snapshot_year'),
-    x='snapshot_year',
+    str_growth.sort_values('snapshot_quarter'),
+    x='snapshot_quarter',
     y='str_pct_of_total',
     color='town',
     markers=True,
-    labels={'snapshot_year': 'Year', 'str_pct_of_total': 'STR % of Total Housing', 'town': 'Town'}
+    labels={'snapshot_quarter': 'Quarter', 'str_pct_of_total': 'STR % of Total Housing', 'town': 'Town'}
 )
 fig5.update_layout(height=500)
 st.plotly_chart(fig5, use_container_width=True)

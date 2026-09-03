@@ -154,12 +154,12 @@ def run():
 
     logger.info(f"Loading {len(matched_only)} matched records...")
     matched_only['snapshot_date'] = pd.Timestamp.now().date()
-    matched_only = matched_only.drop_duplicates(subset=['certificate_id', 'loc_id', 'snapshot_date'])
+    matched_only = matched_only.drop_duplicates(subset=['certificate_id', 'loc_id'])
     logger.info(f"After dedup: {len(matched_only)} match records")
     upsert_dataframe(
         matched_only,
         'staging.stg_str_parcel_match',
-        primary_keys=['certificate_id', 'loc_id', 'snapshot_date']
+        primary_keys=['certificate_id', 'loc_id']
 )
     
     return all_matches
