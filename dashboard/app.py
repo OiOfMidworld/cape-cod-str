@@ -15,7 +15,7 @@ st.set_page_config(
 
 
 
-@st.cache_data
+@st.cache_data(ttl="1h")
 def load_data():
     engine = create_engine(
     os.getenv('DATABASE_URL'),
