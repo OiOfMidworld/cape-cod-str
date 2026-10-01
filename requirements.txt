@@ -4,8 +4,8 @@ pandas==2.2.0
 python-dotenv==1.0.0
 
 # Database
-psycopg2-binary==2.9.9
-psycopg[binary]==3.2.3
+psycopg2-binary==2.9.13
+psycopg[binary]==3.3.6
 sqlalchemy==2.0.27
 
 # Geospatial (Sprint 3)
