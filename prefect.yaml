@@ -24,7 +24,7 @@ deployments:
   version: null
   tags: []
   description: Runs monthly - scrapes STR registry and refreshes mart models.
-  entrypoint: orchestration/flows.py:monthly_pipeline
+  entrypoint: orchestration/flows.py:cape_cod_str_pipeline
   parameters: {}
   work_pool:
     name: defualt

@@ -17,8 +17,12 @@ def run_str_registry():
 
 @task
 def run_massgis():
-    from ingestion.massgis_parcels import run
-    return run()
+    from ingestion.massgis_parcels import DATA_DIR, run
+    results = []
+    for town_dir in sorted((repo_root / DATA_DIR).iterdir()):
+        if town_dir.is_dir():
+            results.append(run(town_dir))
+    return results
 
 @task
 def run_census():
