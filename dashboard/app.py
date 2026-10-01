@@ -84,21 +84,24 @@ st.plotly_chart(fig, use_container_width=True)
 st.divider()
 
 # Owner Analysis
-st.subheader("Owner Residency by Town")
+st.subheader("STR Owner Residency by Town")
+
+owner_analysis['instate_pct'] = round(owner_analysis['instate_count'] / owner_analysis['str_count'] * 100, 1)
+owner_analysis['unknown_pct'] = round(owner_analysis['unknown_count'] / owner_analysis['str_count'] * 100, 1)
 
 fig2 = px.bar(
     owner_analysis.sort_values('outofstate_pct', ascending=True),
-    x=['instate_count', 'outofstate_count', 'unknown_count'],
+    x=['instate_pct', 'outofstate_pct', 'unknown_pct'],
     y='town',
     orientation='h',
-    labels={'value': 'STR Certificates', 'town': '', 'variable': 'Owner'},
+    labels={'value': '% of STR Certificates', 'town': '', 'variable': 'Owner'},
     color_discrete_map={
-        'instate_count': '#2980b9',
-        'outofstate_count': '#c0392b',
-        'unknown_count': '#7f8c8d'
+        'instate_pct': '#2980b9',
+        'outofstate_pct': '#c0392b',
+        'unknown_pct': '#7f8c8d'
     }
 )
-fig2.update_layout(height=500, barmode='stack')
+fig2.update_layout(height=500, barmode='stack', xaxis_ticksuffix='%')
 st.plotly_chart(fig2, use_container_width=True)
 
 
