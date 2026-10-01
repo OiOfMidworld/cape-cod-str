@@ -44,7 +44,7 @@ def _load_lookup() -> dict:
 
     df = pd.read_csv(LOOKUP_PATH)
     _lookup = {
-        row["raw_name"].strip().lower(): row["canonical_name"]
+        row["raw_name"].strip().lower(): row["canonical_name"].strip()
         for _, row in df.iterrows()
     }
     logger.debug(f"Loaded {len(_lookup)} town name mappings")
