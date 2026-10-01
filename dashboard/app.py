@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import os
@@ -86,22 +87,30 @@ st.divider()
 # Owner Analysis
 st.subheader("STR Owner Residency by Town")
 
-owner_analysis['instate_pct'] = round(owner_analysis['instate_count'] / owner_analysis['str_count'] * 100, 1)
-owner_analysis['unknown_pct'] = round(owner_analysis['unknown_count'] / owner_analysis['str_count'] * 100, 1)
+owner_sorted = owner_analysis.sort_values('outofstate_pct', ascending=True)
 
 fig2 = px.bar(
-    owner_analysis.sort_values('outofstate_pct', ascending=True),
-    x=['instate_pct', 'outofstate_pct', 'unknown_pct'],
+    owner_sorted,
+    x=['instate_count', 'outofstate_count', 'unknown_count'],
     y='town',
     orientation='h',
-    labels={'value': '% of STR Certificates', 'town': '', 'variable': 'Owner'},
+    labels={'value': 'STR Certificates', 'town': '', 'variable': 'Owner'},
     color_discrete_map={
-        'instate_pct': '#2980b9',
-        'outofstate_pct': '#c0392b',
-        'unknown_pct': '#7f8c8d'
+        'instate_count': '#2980b9',
+        'outofstate_count': '#c0392b',
+        'unknown_count': '#7f8c8d'
     }
 )
-fig2.update_layout(height=500, barmode='stack', xaxis_ticksuffix='%')
+fig2.add_trace(go.Scatter(
+    x=owner_sorted['str_count'],
+    y=owner_sorted['town'],
+    mode='text',
+    text=[f"{pct}% out-of-state" for pct in owner_sorted['outofstate_pct']],
+    textposition='middle right',
+    showlegend=False,
+    hoverinfo='skip'
+))
+fig2.update_layout(height=500, barmode='stack')
 st.plotly_chart(fig2, use_container_width=True)
 
 
